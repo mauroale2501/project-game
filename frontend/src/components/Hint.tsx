@@ -6,7 +6,7 @@ const Hint = () => {
 
   const fetchHint = async () => {
     try {
-      const response = await fetch("/api/hints");
+      const response = await fetch("http://localhost:8080/api/hints");
       if (!response.ok) {
         throw new Error("Failed fetch");
       }
