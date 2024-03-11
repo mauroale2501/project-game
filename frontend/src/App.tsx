@@ -26,7 +26,7 @@ function App() {
           element={<Home onSelectLevel={handleLevelSelection} />}
         />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/level1" element={<Level1 />} />
+        <Route path="/level1" element={<Level1 initialTime={levelTime} />} />
         <Route path="/level2" element={<Level2 />} />
         <Route path="/last" element={<LastPage />} />
       </Routes>
