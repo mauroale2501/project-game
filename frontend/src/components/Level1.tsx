@@ -3,11 +3,26 @@ import Timer from "./Timer";
 import Hint from "./Hint";
 import Input from "./Input";
 import "../styles/Level1.css";
+import { useState } from "react";
 
 type Level1Props = {
   initialTime: number;
 };
 const Level1 = ({ initialTime }: Level1Props) => {
+  const [key, setKey] = useState<string>("");
+
+  const fetchKey = async () => {
+    try {
+      const response = await fetch("/api/keyLevel1");
+      if (!response.ok) {
+        throw new Error("Failed fetch");
+      }
+      const data = await response.json();
+      setKey(data.hint);
+    } catch (error) {
+      console.error("Error fetching hint:", error);
+    }
+  };
   return (
     <div className="all-level1">
       <div className="timer">
@@ -16,8 +31,8 @@ const Level1 = ({ initialTime }: Level1Props) => {
       <div className="congrats-key">
         <h1>Congrats</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        <Button>Get Key</Button>
-        <p>lorem</p>
+        <Button onClick={fetchKey}>Get Key</Button>
+        {key && <p>{key}</p>}
       </div>
 
       <Container className="level-uncompleted">

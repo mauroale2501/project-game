@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-brand {
+  margin-left: 20px;
+}
+
+.logo-profile {
+  margin-left: 600px;
+}
