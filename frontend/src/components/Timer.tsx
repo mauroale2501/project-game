@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-interface TimerProps {
+type TimerProps = {
   initialTime: number;
-}
+};
 function Timer({ initialTime }: TimerProps) {
   const [timeRemaining, setTimeRemaining] = useState(initialTime);
 
