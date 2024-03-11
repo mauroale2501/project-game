@@ -31,7 +31,7 @@ const Home = ({ onSelectLevel }: HomeProps) => {
       } else if (selectedLevel === null) {
         console.error("asdasdas");
         throw new Error("You must select a level to continue");
-      } //chequear estos errores dps
+      }
     } catch (err) {
       throw new Error("You must select a level to continue");
     }

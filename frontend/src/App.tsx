@@ -10,9 +10,11 @@ import { useState } from "react";
 
 function App() {
   const [selectedLevel, setSelectedLevel] = useState<number>(0);
+  const [levelTime, setLevelTime] = useState<number>(0);
 
-  const handleLevelSelection = (level: number): void => {
+  const handleLevelSelection = (level: number, time: number): void => {
     setSelectedLevel(level);
+    setLevelTime(time);
   };
 
   return (
