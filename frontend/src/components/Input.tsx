@@ -1,32 +1,56 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
+import { Link } from "react-router-dom";
 type InputProps = {
   currentLevel: number;
 };
 
 const Input = ({ currentLevel }: InputProps) => {
   const [nextLevelLink, setNextLevelLink] = useState<string>("");
-
-  const fetchLinkLevel = async () => {
-    let nextLevel = "";
+  let nextLevel = "";
+  const mockFetchNextLevel = async () => {
     if (currentLevel === 2) {
-      nextLevel = "last";
+      nextLevel = "/last";
     } else {
       const nextNumber = currentLevel + 1;
+      console.log(nextNumber);
       nextLevel = "level" + nextNumber.toString();
+      console.log("nextLevel:" + nextLevel);
     }
+    // const mockData = { level: nextLevel };
+
+    return nextLevel;
+  };
+  console.log("nextLevel" + nextLevel);
+
+  const fetchNextLevel = async () => {
     try {
-      const response = await fetch(`/api/${nextLevel}`);
-      if (!response.ok) {
-        throw new Error("Failed fetch");
-      }
-      const data = await response.json();
-      setNextLevelLink(data.hint);
+      const response = await mockFetchNextLevel();
+      setNextLevelLink(response);
     } catch (error) {
       console.error("Error fetching hint:", error);
     }
   };
+  // const fetchLinkLevel = async () => {
+  //   let nextLevel = "";
+  //   if (currentLevel === 2) {
+  //     nextLevel = "last";
+  //   } else {
+  //     const nextNumber = currentLevel + 1;
+  //     nextLevel = "level" + nextNumber.toString();
+  //   }
+  //   try {
+  //     const response = await fetch(`/api/${nextLevel}`);
+  //     if (!response.ok) {
+  //       throw new Error("Failed fetch");
+  //     }
+  //     const data = await response.json();
+  //     setNextLevelLink(data.hint);
+  //   } catch (error) {
+  //     console.error("Error fetching hint:", error);
+  //   }
+  // };
 
   return (
     <>
@@ -39,10 +63,10 @@ const Input = ({ currentLevel }: InputProps) => {
             aria-describedby="key-level"
           />
         </div>
-        <Button onClick={fetchLinkLevel} className="button-level1">
+        <Button onClick={fetchNextLevel} className="button-level1">
           Submit
         </Button>
-        {nextLevelLink && <p>{nextLevelLink}</p>}
+        {nextLevelLink && <Link to={"/" + nextLevel}>{nextLevelLink}</Link>}
       </Form>
     </>
   );

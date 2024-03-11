@@ -19,7 +19,7 @@ public class Controller {
     }
 
     @GetMapping("/hints")
-    public ResponseEntity<String> getPublicMessage() {
+    public ResponseEntity<String> getHint() {
         return ResponseEntity.ok("Here we are");
     }
 

@@ -4,18 +4,26 @@ import { Button } from "react-bootstrap";
 const Hint = () => {
   const [hint, setHint] = useState("");
 
+  const mockFetchHint = async () => {
+    const mockData = { hint: "mock hint" };
+    return mockData;
+  };
+
   const fetchHint = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/hints");
-      if (!response.ok) {
-        throw new Error("Failed fetch");
-      }
-      const data = await response.json();
-      setHint(data.hint);
+      // const response = await fetch("http://localhost:8080/api/hints");
+      const response = await mockFetchHint();
+      // if (!response.ok) {
+      //   throw new Error("Failed fetch");
+      // }
+      // const data = await response.json();
+      setHint(response.hint);
     } catch (error) {
       console.error("Error fetching hint:", error);
     }
-  }; // need to implement cut time in half
+  };
+
+  // need to implement cut time in half
 
   return (
     <div>
