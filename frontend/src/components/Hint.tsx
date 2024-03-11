@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 
-const Hint = () => {
+type HintProps = {
+  onReduceTime: () => void;
+};
+
+const Hint = ({ onReduceTime }: HintProps) => {
   const [hint, setHint] = useState("");
 
   const mockFetchHint = async () => {
@@ -18,12 +22,11 @@ const Hint = () => {
       // }
       // const data = await response.json();
       setHint(response.hint);
+      onReduceTime();
     } catch (error) {
       console.error("Error fetching hint:", error);
     }
   };
-
-  // need to implement cut time in half
 
   return (
     <div>

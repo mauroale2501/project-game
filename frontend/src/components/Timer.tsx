@@ -3,12 +3,16 @@ import { useEffect, useState } from "react";
 type TimerProps = {
   initialTime: number;
 };
+
 function Timer({ initialTime }: TimerProps) {
   const [timeRemaining, setTimeRemaining] = useState(initialTime);
 
   useEffect(() => {
+    setTimeRemaining(initialTime);
+  }, [initialTime]);
+  useEffect(() => {
     const timerInterval = setInterval(() => {
-      setTimeRemaining((prevTime: number) => {
+      setTimeRemaining((prevTime) => {
         if (prevTime <= 0) {
           clearInterval(timerInterval);
           return 0;
@@ -19,7 +23,7 @@ function Timer({ initialTime }: TimerProps) {
     }, 1000);
 
     return () => clearInterval(timerInterval);
-  }, [initialTime]);
+  }, [timeRemaining]);
 
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
@@ -31,7 +35,6 @@ function Timer({ initialTime }: TimerProps) {
     } else {
       formattedSeconds = remainingSeconds.toString();
     }
-
     return minutes + ":" + formattedSeconds;
   };
 

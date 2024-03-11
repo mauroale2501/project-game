@@ -14,20 +14,20 @@ const Input = ({ currentLevel }: InputProps) => {
       nextLevel = "/last";
     } else {
       const nextNumber = currentLevel + 1;
-      console.log(nextNumber);
-      nextLevel = "level" + nextNumber.toString();
+
+      nextLevel = "/level" + nextNumber.toString();
       console.log("nextLevel:" + nextLevel);
     }
-    // const mockData = { level: nextLevel };
+    const mockData = { level: nextLevel };
 
-    return nextLevel;
+    return mockData;
   };
   console.log("nextLevel" + nextLevel);
 
   const fetchNextLevel = async () => {
     try {
       const response = await mockFetchNextLevel();
-      setNextLevelLink(response);
+      setNextLevelLink(response.level);
     } catch (error) {
       console.error("Error fetching hint:", error);
     }
@@ -66,7 +66,7 @@ const Input = ({ currentLevel }: InputProps) => {
         <Button onClick={fetchNextLevel} className="button-level1">
           Submit
         </Button>
-        {nextLevelLink && <Link to={"/" + nextLevel}>{nextLevelLink}</Link>}
+        {nextLevelLink && <Link to={nextLevelLink}>{nextLevelLink}</Link>}
       </Form>
     </>
   );

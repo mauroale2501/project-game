@@ -10,6 +10,7 @@ type Level1Props = {
 };
 const Level1 = ({ initialTime }: Level1Props) => {
   const [key, setKey] = useState<string>("");
+  const [updateTime, setUpdateTime] = useState(initialTime);
 
   const fetchKey = async () => {
     try {
@@ -23,10 +24,14 @@ const Level1 = ({ initialTime }: Level1Props) => {
       console.error("Error fetching hint:", error);
     }
   };
+  const reduceTime = () => {
+    setUpdateTime((prevTime: number) => Math.ceil(prevTime / 2));
+    console.log("esta es la funcion");
+  };
   return (
     <div className="all-level1">
       <div className="timer">
-        <Timer initialTime={initialTime} />
+        <Timer initialTime={updateTime} />
       </div>
       <div className="congrats-key">
         <h1>Congrats</h1>
@@ -47,7 +52,7 @@ const Level1 = ({ initialTime }: Level1Props) => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. autem dicta
             quod minus porro.
           </p>
-          <Hint />
+          <Hint onReduceTime={reduceTime} />
           <Input currentLevel={1} />
         </section>
       </Container>

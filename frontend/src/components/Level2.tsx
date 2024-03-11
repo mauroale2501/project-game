@@ -11,6 +11,7 @@ type Level2Props = {
 
 const Level2 = ({ initialTime }: Level2Props) => {
   const [keyLevel2, setKeyLevel2] = useState();
+  const [updateTime, setUpdateTime] = useState(initialTime);
 
   const fetchLevel2 = async () => {
     try {
@@ -24,11 +25,16 @@ const Level2 = ({ initialTime }: Level2Props) => {
       console.error("Error fetching hint:", error);
     }
   };
+
+  const reduceTime = () => {
+    setUpdateTime((prevTime: number) => Math.ceil(prevTime / 2));
+    console.log("esta es la funcion");
+  };
   return (
     <div className="all-level2">
       <div className="time-pass-level">
         <div className="timer">
-          <Timer initialTime={initialTime} />
+          <Timer initialTime={updateTime} />
         </div>
         <div className="button-level2">
           <Button onClick={fetchLevel2}>Pass to next level</Button>
@@ -41,7 +47,7 @@ const Level2 = ({ initialTime }: Level2Props) => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. autem dicta
           quod minus porro.
         </p>
-        <Hint />
+        <Hint onReduceTime={reduceTime} />
       </section>
       <div className="input-level2">
         <Input currentLevel={2} />
