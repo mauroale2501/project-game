@@ -33,7 +33,7 @@ const Level1 = ({ initialTime }: Level1Props) => {
             quod minus porro.
           </p>
           <Hint />
-          <Input />
+          <Input currentLevel={1} />
         </section>
       </Container>
     </div>
