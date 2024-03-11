@@ -1,6 +1,5 @@
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
-import "../styles/Home.css";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
@@ -8,6 +7,7 @@ import { useState } from "react";
 type HomeProps = {
   onSelectLevel: (level: number, time: number) => void;
 };
+
 const Home = ({ onSelectLevel }: HomeProps) => {
   const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
 
@@ -23,13 +23,13 @@ const Home = ({ onSelectLevel }: HomeProps) => {
         return 0;
     }
   };
+
   const handleStartButton = () => {
     try {
       if (selectedLevel !== null) {
         const time = getLevel(selectedLevel);
         onSelectLevel(selectedLevel, time);
-      } else if (selectedLevel === null) {
-        console.error("asdasdas");
+      } else {
         throw new Error("You must select a level to continue");
       }
     } catch (err) {

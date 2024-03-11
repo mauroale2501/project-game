@@ -7,22 +7,36 @@ import { Route, Routes } from "react-router-dom";
 import LastPage from "./components/LastPage";
 import Level2 from "./components/Level2";
 import { useState } from "react";
+import HomeSimple from "./components/HomeSimple";
 
 function App() {
   const [selectedLevel, setSelectedLevel] = useState<number>(0);
   const [levelTime, setLevelTime] = useState<number>(0);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const handleLevelSelection = (level: number, time: number): void => {
     setSelectedLevel(level);
     setLevelTime(time);
   };
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
   return (
     <div className="container-app">
-      <Nav />
+      <Nav
+        isLoggedIn={isLoggedIn}
+        onLogin={handleLogin}
+        onLogout={handleLogout}
+      />
       <Routes>
+        <Route path="/" element={<HomeSimple />} />
         <Route
-          path="/"
+          path="/Home"
           element={<Home onSelectLevel={handleLevelSelection} />}
         />
         <Route path="/profile" element={<Profile />} />

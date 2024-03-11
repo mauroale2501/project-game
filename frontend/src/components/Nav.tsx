@@ -1,76 +1,59 @@
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
-import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
-import logo from "../assets/react.svg";
+import { Link, useNavigate } from "react-router-dom";
+import { Navbar, Button, Container } from "react-bootstrap";
+import logo from "../assets/logo.jpeg";
+import login from "../assets/login.jpeg";
 import "../styles/Nav.css";
 
-function Nav() {
+type NavProps = {
+  isLoggedIn: boolean;
+  onLogin: () => void;
+  onLogout: () => void;
+};
+
+const Nav = ({ isLoggedIn, onLogin, onLogout }: NavProps) => {
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    onLogin();
+    navigate("/Home");
+  };
+  const handleLogoutClick = () => {
+    onLogout();
+    navigate("/");
+  };
+
   return (
     <Navbar expand="lg" className="nav">
       <Container className="container">
-        <Link to="/">
-          <img src={logo} alt="logo-brand" className="logo-brand" />
+        <Link to="/Home">
+          <img
+            src={logo}
+            width="40"
+            height="40"
+            alt="logo-brand"
+            className="logo-brand"
+          />
         </Link>
-        <Link to="/profile">
-          <img src={logo} alt="logo-profile" className="logo-profile" />
-        </Link>
-        <Button>Log-in</Button>
+        {isLoggedIn ? (
+          <Link to="/profile">
+            <img
+              src={login}
+              width="40"
+              height="40"
+              alt="logo-profile"
+              className="logo-profile"
+            />
+          </Link>
+        ) : null}
+        <Button
+          className="button-log"
+          onClick={isLoggedIn ? handleLogoutClick : handleLoginClick}
+        >
+          {isLoggedIn ? "Log-out" : "Log-in"}
+        </Button>
       </Container>
-      <hr />
     </Navbar>
   );
-}
+};
 
 export default Nav;
-
-// import logo from "../assets/react.svg";
-// import { Link } from "react-router-dom";
-// // import NavBar from "react-bootstrap/Navbar";
-// import "./Nav.css";
-
-// const Nav = () => {
-//   return (
-//     <>
-//       <nav className="nav" style={{ backgroundColor: "#242424" }}>
-//         <Link to="/">
-//           <img className="logo" src={logo} alt="logo-brand" />
-//         </Link>
-//         <Link className="profile" to="/profile">
-//           <img src={logo} alt="profile" />
-//         </Link>
-//       </nav>
-//     </>
-//   );
-// };
-
-// export default Nav;
-// import React from "react";
-// import { Link } from "react-router-dom";
-// import "./Nav.css";
-
-// const Nav: React.FC = () => {
-//   return (
-//     <nav className="navbar">
-//       <div className="navbar-left">
-//         <Link to="/" className="logo">
-//           Logo
-//         </Link>
-//       </div>
-//       <div className="navbar-right">
-//         <Link to="/profile" className="profile-link">
-//           <img
-//             src="ruta-a-tu-imagen-de-perfil"
-//             alt="Profile"
-//             className="profile-image"
-//           />
-//         </Link>
-//         <Link to="/login" className="login-button">
-//           Login
-//         </Link>
-//       </div>
-//     </nav>
-//   );
-// };
-
-// export default Nav;
