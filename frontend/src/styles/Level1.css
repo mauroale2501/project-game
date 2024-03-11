@@ -1,0 +1,27 @@
+.congrats-key {
+  display: none;
+}
+.level-uncompleted {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 80%;
+}
+
+.timer {
+  border: 1px solid black;
+}
+@media screen and (max-width: 600px) {
+  .level-uncompleted {
+    display: none;
+  }
+  .congrats-key {
+    display: block;
+  }
+  .all-level1 {
+    background-color: green;
+    height: 250vh;
+    border: 1px solid black;
+  }
+}
