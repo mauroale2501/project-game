@@ -9,16 +9,16 @@ import java.util.Collection;
 public class GameService {
 //    private long startTime = 0;
 //    private long remainingTime = 0;
-//    GameRepository repo;
-//
-//    public GameService (GameRepository repo) {
-//        this.repo = repo;
-//    }
-//
-//    public String getHint() {
-////        return "A string";
-//        return repo.getHintsLevel1().getFirst();
-//    }
+    GameRepository repo;
+
+    public GameService (GameRepository repo) {
+        this.repo = repo;
+    }
+
+    public String getHint() {
+//        return "A string";
+        return repo.getHintsLevel1().getFirst();
+    }
 
 }
 

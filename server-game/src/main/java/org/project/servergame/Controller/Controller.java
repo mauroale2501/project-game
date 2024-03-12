@@ -31,10 +31,10 @@ public class Controller {
 //    public ResponseEntity<String> getHint() {
 //        return ResponseEntity.ok("Here we are");
 //    }
-//    @GetMapping( "/hints")
-//    public ResponseEntity<String> getHintById() {
-//        return ResponseEntity.ok(service.getHint());
-//    }
+    @GetMapping( "/hints")
+    public ResponseEntity<String> getHintById() {
+        return ResponseEntity.ok(service.getHint());
+    }
 }
 
 //        try {

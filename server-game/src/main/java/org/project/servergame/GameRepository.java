@@ -8,17 +8,17 @@ import java.util.*;
 @Repository
 public class GameRepository {
 
-//    IGameRepository repo;
-//    List<String> hintsLevel1 = new ArrayList<>();
-//
-//    public GameRepository() {
-//        hintsLevel1.add("first hint from backend");
-//        hintsLevel1.add("second hint");
-//        hintsLevel1.add("third hint");
-//    }
-//    public List<String> getHintsLevel1() {
-//        return hintsLevel1;
-//    }
+    IGameRepository repo;
+    List<String> hintsLevel1 = new ArrayList<>();
+
+    public GameRepository() {
+        hintsLevel1.add("first hint from backend");
+        hintsLevel1.add("second hint");
+        hintsLevel1.add("third hint");
+    }
+    public List<String> getHintsLevel1() {
+        return hintsLevel1;
+    }
 }
 
 
