@@ -10,21 +10,25 @@ public class GameRepository {
 
     IGameRepository repo;
     List<String> hintsLevel1 = new ArrayList<>();
+    String keyLevel1 = "key123";
 
     public GameRepository() {
         hintsLevel1.add("first hint from backend");
         hintsLevel1.add("second hint");
         hintsLevel1.add("third hint");
+
     }
+
     public List<String> getHintsLevel1() {
         return hintsLevel1;
     }
+
+    public String getKeyLevel1(){
+        return keyLevel1;
+    }
+
 }
 
-
-//    public void setHintsLevel1(ArrayList<String> hintsLevel1) {
-//        this.hintsLevel1 = hintsLevel1;
-//    }
 
 
 //    private final Map<UUID, Hint> hints;

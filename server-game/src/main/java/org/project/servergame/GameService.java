@@ -7,8 +7,6 @@ import java.util.Collection;
 
 @Service
 public class GameService {
-//    private long startTime = 0;
-//    private long remainingTime = 0;
     GameRepository repo;
 
     public GameService (GameRepository repo) {
@@ -16,8 +14,10 @@ public class GameService {
     }
 
     public String getHint() {
-//        return "A string";
         return repo.getHintsLevel1().getFirst();
+    }
+    public String getKey(){
+        return repo.getKeyLevel1();
     }
 
 }
@@ -27,9 +27,4 @@ public class GameService {
 //        remainingTime /= 2;
 //    }
 //
-//    public long getRemainingTime() {
-//        long elapsedTime = System.currentTimeMillis() - startTime;
-//        return Math.max(0, remainingTime - elapsedTime);
-//    }
-
 
