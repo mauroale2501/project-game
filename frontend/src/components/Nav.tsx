@@ -25,7 +25,7 @@ const Nav = ({ isLoggedIn, onLogin, onLogout }: NavProps) => {
   return (
     <Navbar expand="lg" className="nav">
       <Container className="container">
-        <Link to="/Home">
+        <Link to="/">
           <img
             src={logo}
             width="40"

@@ -2,9 +2,9 @@ import { useState } from "react";
 
 const Profile = () => {
   const [formData, setFormData] = useState({
-    firstname: "Brown",
-    lastname: "Asher",
-    email: "brown@asher.me",
+    firstname: "",
+    lastname: "",
+    email: "",
     // oldPassword: "",
     // newPassword: "",
     // confirmPassword: "",
@@ -22,67 +22,58 @@ const Profile = () => {
   };
 
   return (
-    <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-12 col-lg-10 col-xl-8 mx-auto">
-          <h2 className="h3 mb-4 page-title">Profile</h2>
-          <div className="my-4">
-            <div className="text-center mb-5">
-              <div className="avatar avatar-xl">
-                <img
-                  src="https://bootdey.com/img/Content/avatar/avatar6.png"
-                  alt="Profile"
-                  className="avatar-img rounded-circle"
-                />
-              </div>
-            </div>
-            <form onSubmit={handleSubmit}>
-              <div className="form-row">
-                <div className="form-group col-md-6">
-                  <label htmlFor="firstname">Firstname</label>
-                  <input
-                    type="text"
-                    id="firstname"
-                    name="firstname"
-                    value={formData.firstname}
-                    onChange={handleChange}
-                    className="form-control"
-                    placeholder="Brown"
-                  />
-                </div>
-                <div className="form-group col-md-6">
-                  <label htmlFor="lastname">Lastname</label>
-                  <input
-                    type="text"
-                    id="lastname"
-                    name="lastname"
-                    value={formData.lastname}
-                    onChange={handleChange}
-                    className="form-control"
-                    placeholder="Asher"
-                  />
-                </div>
-                <div className="form-group col-md-6">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="form-control"
-                    placeholder="Asher"
-                  />
-                </div>
-              </div>
-
-              <button type="submit" className="btn btn-primary">
-                Save Change
-              </button>
-            </form>
+    <div className="container-profile">
+      <h2 className="h2-profile">Profile</h2>
+      <div className="avatar">
+        <img
+          src="https://bootdey.com/img/Content/avatar/avatar6.png"
+          alt="Profile"
+          className="avatar-img rounded-circle"
+        />
+      </div>
+      <form onSubmit={handleSubmit}>
+        <div className="form-row">
+          <div className="input-name-all">
+            <label htmlFor="firstname">First Name</label>
+            <input
+              type="text"
+              id="firstname"
+              name="firstname"
+              value={formData.firstname}
+              onChange={handleChange}
+              className="name"
+              placeholder="John"
+            />
+          </div>
+          <div className="input-last-name-all">
+            <label htmlFor="lastname">Last Name</label>
+            <input
+              type="text"
+              id="lastname"
+              name="lastname"
+              value={formData.lastname}
+              onChange={handleChange}
+              className="last-name"
+              placeholder="Doe"
+            />
+          </div>
+          <div className="input-email-all">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="email"
+              placeholder="john@doe.me"
+            />
           </div>
         </div>
-      </div>
+        <button type="submit" className="btn btn-primary">
+          Save Change
+        </button>
+      </form>
     </div>
   );
 };

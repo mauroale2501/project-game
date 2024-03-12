@@ -1,3 +1,6 @@
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 const Home = () => {
   return (
     <div className="home-simple">
@@ -9,6 +12,9 @@ const Home = () => {
           sunt magnam, commodi consequuntur distinctio! Labore adipisci
           reiciendis, error sapiente pariatur iste!
         </p>
+        <Link to="/Home">
+          <Button>Start</Button>
+        </Link>
       </main>
     </div>
   );

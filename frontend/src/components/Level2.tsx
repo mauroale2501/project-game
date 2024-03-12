@@ -27,7 +27,7 @@ const Level2 = ({ initialTime }: Level2Props) => {
   };
 
   const reduceTime = () => {
-    setUpdateTime((prevTime: number) => Math.ceil(prevTime / 2));
+    setUpdateTime((updateTime: number) => Math.ceil(updateTime / 2));
     console.log("esta es la funcion");
   };
   return (
