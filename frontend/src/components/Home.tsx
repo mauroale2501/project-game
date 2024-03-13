@@ -11,6 +11,7 @@ type HomeProps = {
 const Home = ({ onSelectLevel }: HomeProps) => {
   const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
   const [, setSelectedTime] = useState<number | null>(null);
+  const [error, setError] = useState("");
 
   const getLevel = (level: number) => {
     switch (level) {
@@ -25,17 +26,26 @@ const Home = ({ onSelectLevel }: HomeProps) => {
     }
   };
 
+  // const handleStartButton = () => {
+  //   try {
+  //     if (selectedLevel !== null) {
+  //       const time = getLevel(selectedLevel);
+  //       setSelectedTime(time);
+  //       onSelectLevel(selectedLevel, time);
+  //     } else {
+  //       throw new Error("You must select a level to continue");
+  //     }
+  //   } catch (err) {
+  //     throw new Error("You must select a level to continue");
+  //   }
+  // };
   const handleStartButton = () => {
-    try {
-      if (selectedLevel !== null) {
-        const time = getLevel(selectedLevel);
-        setSelectedTime(time);
-        onSelectLevel(selectedLevel, time);
-      } else {
-        throw new Error("You must select a level to continue");
-      }
-    } catch (err) {
-      throw new Error("You must select a level to continue");
+    if (selectedLevel !== null) {
+      const time = getLevel(selectedLevel);
+      setSelectedTime(time);
+      onSelectLevel(selectedLevel, time);
+    } else {
+      setError("You must select a level to continue");
     }
   };
 
@@ -79,9 +89,14 @@ const Home = ({ onSelectLevel }: HomeProps) => {
         </ToggleButtonGroup>
         <div className="home-buttons-start">
           <Link to="/level1">
-            <Button className="button-start" onClick={handleStartButton}>
+            <Button
+              className="button-start"
+              onClick={handleStartButton}
+              disabled={!selectedLevel}
+            >
               Start Demo
             </Button>
+            {error && <p className="error-message">{error}</p>}
           </Link>
           <Link to="/last">
             <Button className="button-subscribe">Subscribe</Button>
