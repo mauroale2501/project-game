@@ -1,5 +1,5 @@
 import { Button, Container } from "react-bootstrap";
-import Timer from "./Timer";
+import Timer from "./Timer1";
 import Hint from "./Hint";
 import Input from "./Input";
 import "../styles/Level1.css";
@@ -52,7 +52,7 @@ const Level1 = ({ initialTime }: Level1Props) => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. autem dicta
             quod minus porro.
           </p>
-          <Hint onReduceTime={reduceTime} />
+          <Hint currentLevel={1} onReduceTime={reduceTime} />
           <Input currentLevel={1} />
         </section>
       </Container>

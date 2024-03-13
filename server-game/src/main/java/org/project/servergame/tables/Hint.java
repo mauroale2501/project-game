@@ -2,13 +2,11 @@ package org.project.servergame.tables;
 
 import jakarta.persistence.*;
 
-import java.util.UUID;
 @Entity
 @Table(name = "hints")
 public class Hint {
 
     @Id
-
     @Column(name = "hint_id")
 
     private int id;
@@ -22,7 +20,6 @@ public class Hint {
     }
 
     public Hint() {
-
     }
 
     public int getId() {
@@ -40,8 +37,4 @@ public class Hint {
     public void setHint(String hint) {
         this.hint = hint;
     }
-
-
-
-
 }

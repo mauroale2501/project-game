@@ -2,40 +2,21 @@ package org.project.servergame;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class GameService {
-    GameRepository repo;
+    IGameRepository repo;
+    private int lastHintId = 0;
 
-    public GameService (GameRepository repo) {
+    public GameService(IGameRepository repo) {
         this.repo = repo;
     }
 
-    public String getHintStringLevel1(int lastHintId) {
-        Optional<String> hintStringOptional = repo.findRandomHintString(lastHintId);
-        return hintStringOptional.orElse("No hint available");
+    public String getHintStringByLevel(int hintId) {
+        String hint = repo.findHintStringByLevel(hintId);
+        return hint != null ? hint : "No hint available for this level";
     }
 
-//    public String getHintStringLevel2(int lastHintId) {
-//        Optional<String> hintStringOptional = repo.findRandomHintString(lastHintId);
-//        return hintStringOptional.orElse("No hint available");
-//    }
-
-    public String getHint() {
-        return repo.getHintsLevel1().getFirst();
+    public void incrementHintId(int hint) {
+        lastHintId++;
     }
-    public String getKey(){
-        return repo.getKeyLevel1();
-    }
-
-
-
 }
-
-
-//    public void halfTime() {
-//        remainingTime /= 2;
-//    }
-//
-

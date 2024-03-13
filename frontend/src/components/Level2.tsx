@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import Hint from "./Hint";
 import Input from "./Input";
-import Timer from "./Timer";
+import Timer from "./Timer1";
 import "../styles/Level2.css";
 import { useEffect, useState } from "react";
 
@@ -50,7 +50,7 @@ const Level2 = ({ initialTime }: Level2Props) => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. autem dicta
           quod minus porro.
         </p>
-        <Hint onReduceTime={reduceTime} />
+        <Hint currentLevel={2} onReduceTime={reduceTime} />
       </section>
       <div className="input-level2">
         <Input currentLevel={2} />
