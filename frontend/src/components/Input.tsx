@@ -2,55 +2,37 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
-type InputProps = {
-  currentLevel: number;
-};
 
-const Input = ({ currentLevel }: InputProps) => {
-  const [nextLevelLink, setNextLevelLink] = useState<string>("");
-  let nextLevel = "";
-  const mockFetchNextLevel = async () => {
-    if (currentLevel === 2) {
-      nextLevel = "/last";
-    } else {
-      const nextNumber = currentLevel + 1;
+const Input = ({ currentLevel }: { currentLevel: number }) => {
+  const [key, setKey] = useState("");
+  const [message, setMessage] = useState("");
+  const [nextLevelLink, setNextLevelLink] = useState("");
+  const [error, setError] = useState("");
 
-      nextLevel = "/level" + nextNumber.toString();
-      console.log("nextLevel:" + nextLevel);
-    }
-    const mockData = { level: nextLevel };
-
-    return mockData;
-  };
-  console.log("nextLevel" + nextLevel);
-
-  const fetchNextLevel = async () => {
+  const handleSubmit = async () => {
     try {
-      const response = await mockFetchNextLevel();
-      setNextLevelLink(response.level);
+      const response = await fetch(
+        `http://localhost:8080/api/validateKey/${currentLevel}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: key,
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to validate key");
+      }
+      const data = await response.json();
+      setMessage(data.message);
+      if (data.nextLevelLink) {
+        setNextLevelLink(data.nextLevelLink);
+      }
     } catch (error) {
-      console.error("Error fetching hint:", error);
+      setError("Invalid Key");
     }
   };
-  // const fetchLinkLevel = async () => {
-  //   let nextLevel = "";
-  //   if (currentLevel === 2) {
-  //     nextLevel = "last";
-  //   } else {
-  //     const nextNumber = currentLevel + 1;
-  //     nextLevel = "level" + nextNumber.toString();
-  //   }
-  //   try {
-  //     const response = await fetch(`/api/${nextLevel}`);
-  //     if (!response.ok) {
-  //       throw new Error("Failed fetch");
-  //     }
-  //     const data = await response.json();
-  //     setNextLevelLink(data.hint);
-  //   } catch (error) {
-  //     console.error("Error fetching hint:", error);
-  //   }
-  // };
 
   return (
     <>
@@ -61,12 +43,21 @@ const Input = ({ currentLevel }: InputProps) => {
             type="text"
             id="key-level"
             aria-describedby="key-level"
+            value={key}
+            onChange={(e) => setKey(e.target.value)}
           />
         </div>
-        <Button onClick={fetchNextLevel} className="button-level1">
+        <Button onClick={handleSubmit} className="button-level1">
           Submit
         </Button>
-        {nextLevelLink && <Link to={nextLevelLink}>{nextLevelLink}</Link>}
+        {error && <p>{error}</p>}
+        {message && <p>{message}</p>}
+        {nextLevelLink && (
+          <p>
+            Congratulations! <Link to={nextLevelLink}>Click here</Link> to go to
+            the next level.
+          </p>
+        )}
       </Form>
     </>
   );

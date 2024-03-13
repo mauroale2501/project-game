@@ -4,6 +4,11 @@ import org.project.servergame.GameService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
+
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
@@ -15,6 +20,65 @@ public class Controller {
     public Controller(GameService service) {
         this.service = service;
     }
+    @PostMapping("/validateKey/{level}")
+    public ResponseEntity<Object> validateKey(@RequestBody String key,
+                                              @PathVariable int level) {
+        String realKey = service.getKeyById(level);
+        String message;
+        String nextLevelLink;
+
+        if (key.equals(realKey)) {
+            nextLevelLink = getNextLevelLink(level);
+            message = "Congrats! Click here to go to the next level";
+        }else {
+            message = "Invalid key";
+            return ResponseEntity.badRequest().body(message);
+        }
+        return ResponseEntity.ok().body(
+                Map.of("message", message, "nextLevelLink", nextLevelLink)
+        );
+    }
+
+
+    private String getNextLevelLink(int currentLevel) {
+        if (currentLevel == 1) {
+            return "/level2";
+        } else if (currentLevel == 2) {
+            return "/last";
+        }
+            return "";
+
+    }
+//    @PostMapping("/validateKey/{level}")
+//    public ResponseEntity<Object> validateKey(@RequestBody String key,
+//                                              @PathVariable int level) {
+//        String expectedKey = service.getKeyById(level);
+//        String message;
+//
+//        if (key.equals(expectedKey)) {
+//            message = "Congrats, next level: ";
+//        } else {
+//            message = "Invalid key";
+//        }
+//
+//        return ResponseEntity.ok().body(Map.of("message", message));
+//    }
+
+//    @PostMapping("/validateKey/{level}")
+//    public ResponseEntity<Object> validateKey(@RequestBody String key,
+//                                              @PathVariable int level) {
+//
+//
+//        if (Objects.equals(key, service.getKeyById(level))){
+//            String nextLevelLink = "/level" + level+1;
+//            System.out.println("nextLevelLink = " + nextLevelLink);
+//            String message = "Good job!";
+//
+//            return ResponseEntity.ok().body(Map.of("message", message, "nextLevelLink", nextLevelLink));
+//
+//        }
+//        return null;
+//    }
 
     @GetMapping("/hints/{level}")
     public String getHintLevel(@PathVariable int level) {
@@ -43,7 +107,7 @@ public class Controller {
         }
 
         return ResponseEntity.ok()
-                .header("THIS-MIGHT-BE-THE-KEY-BUT-YOU-HAVE-TO-UNCODE", keyLevel2)
+                .header("THIS-MIGHT-BE-THE-KEY-BUT-YOU-HAVE-TO-UNCODE-IT", keyLevel2)
                 .body(message);
     }
 
