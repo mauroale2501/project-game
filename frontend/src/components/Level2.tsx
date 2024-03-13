@@ -10,9 +10,9 @@ type Level2Props = {
 };
 
 const Level2 = ({ initialTime }: Level2Props) => {
-  const [keyLevel2, setKeyLevel2] = useState();
+  const [keyLevel2, setKeyLevel2] = useState<string>("");
   const [updateTime, setUpdateTime] = useState(initialTime);
-  const level = 1;
+  const level = 2;
 
   const fetchLevel2 = async () => {
     try {
@@ -22,8 +22,9 @@ const Level2 = ({ initialTime }: Level2Props) => {
       if (!response.ok) {
         throw new Error("Failed fetch");
       }
-      const data = await response.json();
-      setKeyLevel2(data.message);
+      const data = await response.text();
+      setKeyLevel2(data);
+      console.log("Good job checking the errors. you are on the right track");
     } catch (error) {
       console.error("Error fetching hint:", error);
     }

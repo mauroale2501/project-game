@@ -4,7 +4,6 @@ import org.project.servergame.GameService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
@@ -27,11 +26,32 @@ public class Controller {
         return hint;
     }
 
-    @GetMapping("/keyLevel/{key}")
-    public ResponseEntity<String> getKeyLevel(@PathVariable int key) {
+    @GetMapping("/keyLevel/{level}")
+    public ResponseEntity<String> getKeyLevel(@PathVariable int level) {
+        String message;
+        String keyLevel2;
 
-        return ResponseEntity.ok(service.getKeyById(key) );
+        if (level == 1) {
+            return ResponseEntity.ok(service.getKeyById(level));
+
+        } else if (level == 2) {
+            keyLevel2 = service.getKeyById(level);
+            message = "oops! maybe you should look elsewhere";
+
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok()
+                .header("THIS-MIGHT-BE-THE-KEY-BUT-YOU-HAVE-TO-UNCODE", keyLevel2)
+                .body(message);
     }
+
+//    @GetMapping("/keyLevel/{key}")
+//    public ResponseEntity<String> getKeyLevel(@PathVariable int key) {
+//    String keyLevel = service.getKeyById(key);
+//        return ResponseEntity.ok(keyLevel);
+//    }
 
 
     private int calculateFirstHintId(int level) {

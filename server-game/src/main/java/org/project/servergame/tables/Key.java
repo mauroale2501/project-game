@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "keys")
 public class Key {
-
+ 
     @Id
     @Column(name = "key_id")
     private int id;
