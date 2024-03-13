@@ -8,7 +8,6 @@ public class Hint {
 
     @Id
     @Column(name = "hint_id")
-
     private int id;
 
     @Column(name = "hint_string")

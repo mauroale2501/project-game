@@ -12,9 +12,13 @@ const Level1 = ({ initialTime }: Level1Props) => {
   const [key, setKey] = useState<string>("");
   const [updateTime, setUpdateTime] = useState(initialTime);
 
+  const level = 1;
+
   const fetchKey = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/keyLevel1");
+      const response = await fetch(
+        `http://localhost:8080/api/keyLevel/${level}`
+      );
       if (!response.ok) {
         throw new Error("Failed fetch");
       }

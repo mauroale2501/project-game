@@ -12,10 +12,13 @@ type Level2Props = {
 const Level2 = ({ initialTime }: Level2Props) => {
   const [keyLevel2, setKeyLevel2] = useState();
   const [updateTime, setUpdateTime] = useState(initialTime);
+  const level = 1;
 
   const fetchLevel2 = async () => {
     try {
-      const response = await fetch("/api/keyLevel2");
+      const response = await fetch(
+        `http://localhost:8080/api/keyLevel/${level}`
+      );
       if (!response.ok) {
         throw new Error("Failed fetch");
       }

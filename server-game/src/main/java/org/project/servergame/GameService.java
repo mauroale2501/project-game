@@ -16,6 +16,10 @@ public class GameService {
         return hint != null ? hint : "No hint available for this level";
     }
 
+    public String getKeyById(int keyId) {
+        String key = repo.findKeyById(keyId);
+        return key;
+    }
     public void incrementHintId(int hint) {
         lastHintId++;
     }

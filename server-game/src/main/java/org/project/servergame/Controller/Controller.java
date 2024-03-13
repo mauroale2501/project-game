@@ -1,6 +1,7 @@
 package org.project.servergame.Controller;
 
 import org.project.servergame.GameService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -11,11 +12,6 @@ import java.time.LocalDateTime;
 public class Controller {
 
     private final GameService service;
-
-    private LocalDateTime startTime;
-    private LocalDateTime stopTime;
-    private static int timeLeft = 0;
-//    private int lastHintId = 0;
 
     public Controller(GameService service) {
         this.service = service;
@@ -30,6 +26,14 @@ public class Controller {
 
         return hint;
     }
+
+    @GetMapping("/keyLevel/{key}")
+    public ResponseEntity<String> getKeyLevel(@PathVariable int key) {
+
+        return ResponseEntity.ok(service.getKeyById(key) );
+    }
+
+
     private int calculateFirstHintId(int level) {
         int levelAdjust = level - 1;
         int hintsForLevel = 2;
@@ -38,6 +42,7 @@ public class Controller {
 
         return firstHintId;
     }
+}
 
 
 //    -----------
@@ -84,5 +89,4 @@ public class Controller {
 //        timeLeft = newTimeLeft;
 //        return ResponseEntity.noContent().build();
 //    }
-}
 
