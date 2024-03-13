@@ -3,7 +3,7 @@ import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
-import NewTimer from "./NewTimer";
+// import NewTimer from "./NewTimer";
 
 type HomeProps = {
   onSelectLevel: (level: number, time: number) => void;
@@ -103,7 +103,7 @@ const Home = ({ onSelectLevel }: HomeProps) => {
             <Button className="button-subscribe">Subscribe</Button>
           </Link>
         </div>
-        <NewTimer />
+        {/* <NewTimer /> */}
       </section>
     </div>
   );

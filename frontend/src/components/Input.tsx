@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
+import { stopTimer } from "./stopTimer";
+import { startTimer } from "./startTimer";
 
 const Input = ({ currentLevel }: { currentLevel: number }) => {
   const [key, setKey] = useState("");
@@ -26,6 +28,10 @@ const Input = ({ currentLevel }: { currentLevel: number }) => {
       }
       const data = await response.json();
       setMessage(data.message);
+      const { startDate, timerIdString } = await startTimer({ level: 2 });
+      stopTimer(timerIdString, startDate, currentLevel);
+      console.log("startDate", startDate);
+      console.log("timerIdString", timerIdString);
       if (data.nextLevelLink) {
         setNextLevelLink(data.nextLevelLink);
       }
@@ -54,7 +60,7 @@ const Input = ({ currentLevel }: { currentLevel: number }) => {
         {message && <p>{message}</p>}
         {nextLevelLink && (
           <p>
-            Congratulations! <Link to={nextLevelLink}>Click here</Link> to go to
+            Congratulations! <Link to={nextLevelLink}>Click Here</Link> to go to
             the next level.
           </p>
         )}

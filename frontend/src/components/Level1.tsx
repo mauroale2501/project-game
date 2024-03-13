@@ -4,6 +4,7 @@ import Hint from "./Hint";
 import Input from "./Input";
 import "../styles/Level1.css";
 import { useState } from "react";
+import NewTimer from "./NewTimer";
 
 type Level1Props = {
   initialTime: number;
@@ -60,6 +61,7 @@ const Level1 = ({ initialTime }: Level1Props) => {
           <Input currentLevel={1} />
         </section>
       </Container>
+      <NewTimer />
     </div>
   );
 };
