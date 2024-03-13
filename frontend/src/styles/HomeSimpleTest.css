@@ -1,0 +1,59 @@
+.hero-block .carousel-item:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.carousel {
+  width: 100%;
+  height: 100vh;
+}
+.carousel-inner {
+  height: 100%;
+}
+.carousel-item {
+  height: 100%;
+}
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  bottom: 30.25rem !important;
+}
+h1 {
+  font-size: 60px !important;
+}
+.btn.btn-primary {
+  background: #f64b4b;
+  border-color: #f64b4b;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  padding: 13px 35px;
+  text-transform: uppercase;
+  transition: background 0.3s linear, color 0.3s linear;
+  -webkit-transition: background 0.3s linear, color 0.3s linear;
+}
+
+@media only screen and (max-width: 1023px) {
+  h1 {
+    font-size: 30px;
+    margin: 40 0 15px;
+  }
+  h3 {
+    font-size: 15px;
+    margin: 40 0 15px;
+  }
+  .carousel-caption {
+    bottom: 8.25rem;
+    top: 2rem;
+  }
+}

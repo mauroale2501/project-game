@@ -8,9 +8,11 @@ import LastPage from "./components/LastPage";
 import Level2 from "./components/Level2";
 import { useState } from "react";
 import HomeSimple from "./components/HomeSimple";
+// import HomeSimpleTest from "./components/HomeSimpleTest";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const [selectedLevel, setSelectedLevel] = useState<number>(0);
+  const [, setSelectedLevel] = useState<number>(0);
   const [levelTime, setLevelTime] = useState<number>(0);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 

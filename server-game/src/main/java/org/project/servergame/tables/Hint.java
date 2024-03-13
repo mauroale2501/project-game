@@ -1,16 +1,35 @@
 package org.project.servergame.tables;
 
-import java.util.UUID;
+import jakarta.persistence.*;
 
+import java.util.UUID;
+@Entity
+@Table(name = "hints")
 public class Hint {
 
-    private UUID id;
+    @Id
 
-    public UUID getId() {
+    @Column(name = "hint_id")
+
+    private int id;
+
+    @Column(name = "hint_string")
+    private String hint;
+
+    public Hint(int id, String hint) {
+        this.id = id;
+        this.hint = hint;
+    }
+
+    public Hint() {
+
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -22,11 +41,7 @@ public class Hint {
         this.hint = hint;
     }
 
-    private String hint;
-    public Hint(UUID id, String hint) {
-        this.id = id;
-        this.hint = hint;
-    }
+
 
 
 }

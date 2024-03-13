@@ -3,7 +3,6 @@ import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
-import TestTimer from "./TestTimer";
 
 type HomeProps = {
   onSelectLevel: (level: number, time: number) => void;
@@ -11,6 +10,7 @@ type HomeProps = {
 
 const Home = ({ onSelectLevel }: HomeProps) => {
   const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
+  const [, setSelectedTime] = useState<number | null>(null);
 
   const getLevel = (level: number) => {
     switch (level) {
@@ -29,6 +29,7 @@ const Home = ({ onSelectLevel }: HomeProps) => {
     try {
       if (selectedLevel !== null) {
         const time = getLevel(selectedLevel);
+        setSelectedTime(time);
         onSelectLevel(selectedLevel, time);
       } else {
         throw new Error("You must select a level to continue");
@@ -86,7 +87,6 @@ const Home = ({ onSelectLevel }: HomeProps) => {
             <Button className="button-subscribe">Subscribe</Button>
           </Link>
         </div>
-        <TestTimer />
       </section>
     </div>
   );

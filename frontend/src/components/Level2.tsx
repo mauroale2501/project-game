@@ -3,7 +3,7 @@ import Hint from "./Hint";
 import Input from "./Input";
 import Timer from "./Timer";
 import "../styles/Level2.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Level2Props = {
   initialTime: number;
@@ -25,6 +25,9 @@ const Level2 = ({ initialTime }: Level2Props) => {
       console.error("Error fetching hint:", error);
     }
   };
+  useEffect(() => {
+    setUpdateTime(initialTime);
+  }, [initialTime]);
 
   const reduceTime = () => {
     setUpdateTime((updateTime: number) => Math.ceil(updateTime / 2));

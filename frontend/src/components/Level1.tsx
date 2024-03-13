@@ -12,20 +12,6 @@ const Level1 = ({ initialTime }: Level1Props) => {
   const [key, setKey] = useState<string>("");
   const [updateTime, setUpdateTime] = useState(initialTime);
 
-  // const mockFetchKeyLevel1 = async () => {
-  //   const mockData = { key: "mock key level 1" };
-  //   return mockData;
-  // };
-
-  // const fetchKey = async () => {
-  //   try {
-  //     const response = await mockFetchKeyLevel1();
-
-  //     setKey(response.key);
-  //   } catch (error) {
-  //     console.error("Error fetching key:", error);
-  //   }
-  // };
   const fetchKey = async () => {
     try {
       const response = await fetch("http://localhost:8080/api/keyLevel1");
@@ -40,7 +26,7 @@ const Level1 = ({ initialTime }: Level1Props) => {
   };
   const reduceTime = () => {
     setUpdateTime((prevTime: number) => prevTime / 2);
-    console.log("esta es la funcion");
+    console.log("esta es la funcion reduce");
   };
   return (
     <div className="all-level1">

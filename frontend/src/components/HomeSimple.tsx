@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const Home = () => {
+const HomeSimple = () => {
   return (
     <div className="home-simple">
       <main>
@@ -20,4 +20,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeSimple;

@@ -1,14 +1,20 @@
 package org.project.servergame;
 
 import org.project.servergame.tables.Hint;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
 @Repository
 public class GameRepository {
-
     IGameRepository repo;
+    @Autowired
+    public GameRepository(IGameRepository repo) {
+        this.repo = repo;
+    }
+
+
     List<String> hintsLevel1 = new ArrayList<>();
     String keyLevel1 = "key123";
 
@@ -19,6 +25,9 @@ public class GameRepository {
 
     }
 
+    public Optional<String> findRandomHintString(int lastHintId){
+        return repo.findRandomHintString(lastHintId);
+    }
     public List<String> getHintsLevel1() {
         return hintsLevel1;
     }

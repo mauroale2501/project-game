@@ -1,9 +1,8 @@
 package org.project.servergame;
 
-import org.project.servergame.tables.Hint;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class GameService {
@@ -13,12 +12,24 @@ public class GameService {
         this.repo = repo;
     }
 
+    public String getHintStringLevel1(int lastHintId) {
+        Optional<String> hintStringOptional = repo.findRandomHintString(lastHintId);
+        return hintStringOptional.orElse("No hint available");
+    }
+
+//    public String getHintStringLevel2(int lastHintId) {
+//        Optional<String> hintStringOptional = repo.findRandomHintString(lastHintId);
+//        return hintStringOptional.orElse("No hint available");
+//    }
+
     public String getHint() {
         return repo.getHintsLevel1().getFirst();
     }
     public String getKey(){
         return repo.getKeyLevel1();
     }
+
+
 
 }
 
