@@ -1,5 +1,5 @@
 import { Button, Container } from "react-bootstrap";
-import Timer from "./Timer1";
+import Timer from "./Timer";
 import Hint from "./Hint";
 import Input from "./Input";
 import "../styles/Level1.css";

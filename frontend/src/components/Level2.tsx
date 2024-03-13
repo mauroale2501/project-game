@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import Hint from "./Hint";
 import Input from "./Input";
-import Timer from "./Timer1";
+import Timer from "./Timer";
 import "../styles/Level2.css";
 import { useEffect, useState } from "react";
 

@@ -1,13 +1,14 @@
 package org.project.servergame.Controller;
 
 import org.project.servergame.GameService;
+import org.project.servergame.tables.CurrentGame;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -20,6 +21,22 @@ public class Controller {
     public Controller(GameService service) {
         this.service = service;
     }
+
+    @PostMapping("/startTimer")
+    public String startTimer(@RequestBody Map<String, String> request) {
+        System.out.println("userId = " + request);
+        String userId = request.get("userId");
+        String startDateString = request.get("startDate");
+
+
+////        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy, HH:mm:ss");
+        LocalDateTime startDate = LocalDateTime.parse(startDateString, formatter);
+
+        service.save(new CurrentGame(1,1,userId,startDate, null));
+        return userId;
+    }
+
     @PostMapping("/validateKey/{level}")
     public ResponseEntity<Object> validateKey(@RequestBody String key,
                                               @PathVariable int level) {
@@ -49,37 +66,6 @@ public class Controller {
             return "";
 
     }
-//    @PostMapping("/validateKey/{level}")
-//    public ResponseEntity<Object> validateKey(@RequestBody String key,
-//                                              @PathVariable int level) {
-//        String expectedKey = service.getKeyById(level);
-//        String message;
-//
-//        if (key.equals(expectedKey)) {
-//            message = "Congrats, next level: ";
-//        } else {
-//            message = "Invalid key";
-//        }
-//
-//        return ResponseEntity.ok().body(Map.of("message", message));
-//    }
-
-//    @PostMapping("/validateKey/{level}")
-//    public ResponseEntity<Object> validateKey(@RequestBody String key,
-//                                              @PathVariable int level) {
-//
-//
-//        if (Objects.equals(key, service.getKeyById(level))){
-//            String nextLevelLink = "/level" + level+1;
-//            System.out.println("nextLevelLink = " + nextLevelLink);
-//            String message = "Good job!";
-//
-//            return ResponseEntity.ok().body(Map.of("message", message, "nextLevelLink", nextLevelLink));
-//
-//        }
-//        return null;
-//    }
-
     @GetMapping("/hints/{level}")
     public String getHintLevel(@PathVariable int level) {
         int startHint = calculateFirstHintId(level);
@@ -111,13 +97,6 @@ public class Controller {
                 .body(message);
     }
 
-//    @GetMapping("/keyLevel/{key}")
-//    public ResponseEntity<String> getKeyLevel(@PathVariable int key) {
-//    String keyLevel = service.getKeyById(key);
-//        return ResponseEntity.ok(keyLevel);
-//    }
-
-
     private int calculateFirstHintId(int level) {
         int levelAdjust = level - 1;
         int hintsForLevel = 2;
@@ -128,49 +107,4 @@ public class Controller {
     }
 }
 
-
-//    -----------
-//    @GetMapping("/hintsLevel2")
-//    public String getHintLevel2() {
-//        String nextHint = service.getHintStringLevel2(lastHintId);
-//        lastHintId++;
-//
-//        return nextHint;
-//    }
-
-
-//    @GetMapping("/keyLevel1")
-//    public ResponseEntity<String> getKeyLevel1(){
-//        return ResponseEntity.ok(service.getKey());
-//    }
-//
-//    @PostMapping("/start")
-//    public ResponseEntity<?> startTimer() {
-//        startTime = LocalDateTime.now();
-//        return ResponseEntity.ok().build();
-//    }
-//
-//    @PostMapping("/stop")
-//    public ResponseEntity<?> stopTimer() {
-//        stopTime = LocalDateTime.now();
-//        return ResponseEntity.ok().build();
-//    }
-//
-//    @GetMapping("/status")
-//    public ResponseEntity<Map<String, Object>> getTimerStatus() {
-//        Map<String, Object> status = new HashMap<>();
-//        status.put("startTime", startTime);
-//        status.put("stopTime", stopTime);
-//        return ResponseEntity.ok(status);
-//    }
-//    @GetMapping("/api/timeLeft")
-//    public ResponseEntity<Integer> getTimeLeft() {
-//        return ResponseEntity.ok(timeLeft);
-//    }
-//
-//    @PutMapping("/api/timeLeft")
-//    public ResponseEntity<Void> updateTimeLeft(@RequestBody int newTimeLeft) {
-//        timeLeft = newTimeLeft;
-//        return ResponseEntity.noContent().build();
-//    }
 

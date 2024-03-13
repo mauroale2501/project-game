@@ -1,14 +1,22 @@
 package org.project.servergame;
 
+import org.project.servergame.tables.CurrentGame;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
+//@Transactional
 public class GameService {
-    IGameRepository repo;
+    IHintRepository repo;
+    IKeyRepository repoKey;
+    ICurrentGameRepository repoCurrentGame;
     private int lastHintId = 0;
 
-    public GameService(IGameRepository repo) {
+    public GameService(IHintRepository repo, IKeyRepository repoKey, ICurrentGameRepository repoCurrentGame) {
         this.repo = repo;
+        this.repoKey = repoKey;
+        this.repoCurrentGame = repoCurrentGame;
     }
 
     public String getHintStringByLevel(int hintId) {
@@ -17,10 +25,20 @@ public class GameService {
     }
 
     public String getKeyById(int keyId) {
-        String key = repo.findKeyById(keyId);
+        String key = repoKey.findKeyById(keyId);
         return key;
     }
     public void incrementHintId(int hint) {
         lastHintId++;
     }
+
+    public CurrentGame findBySessionIdAndEndDateIsNull(String userId) {
+        return repoCurrentGame.findBySessionIdAndEndDateIsNull(userId);
+    }
+
+    public void save(CurrentGame newGame) {
+        newGame.setStartDate(newGame.getStartDate());
+        repoCurrentGame.save(newGame);
+    }
+
 }
