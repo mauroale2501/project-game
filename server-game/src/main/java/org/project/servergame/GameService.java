@@ -3,6 +3,7 @@ package org.project.servergame;
 import org.project.servergame.tables.CurrentGame;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Service
@@ -11,7 +12,7 @@ public class GameService {
     IHintRepository repo;
     IKeyRepository repoKey;
     ICurrentGameRepository repoCurrentGame;
-    private int lastHintId = 0;
+    int lastHintId = 0;
 
     public GameService(IHintRepository repo, IKeyRepository repoKey, ICurrentGameRepository repoCurrentGame) {
         this.repo = repo;
@@ -21,8 +22,12 @@ public class GameService {
 
     public String getHintStringByLevel(int hintId) {
         String hint = repo.findHintStringByLevel(hintId);
-        return hint != null ? hint : "No hint available for this level";
-    }
+        if (hint == null) {
+            return "No hint available for this level";
+        } else {
+            return hint;
+        }
+}
 
     public String getKeyById(int keyId) {
         String key = repoKey.findKeyById(keyId);
@@ -36,9 +41,9 @@ public class GameService {
         return repoCurrentGame.findBySessionIdAndEndDateIsNull(userId);
     }
 
-    public void save(CurrentGame newGame) {
+    public CurrentGame save(CurrentGame newGame) {
         newGame.setStartDate(newGame.getStartDate());
-        repoCurrentGame.save(newGame);
+       CurrentGame game= repoCurrentGame.save(newGame);
+        return  game;
     }
-
 }

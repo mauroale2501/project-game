@@ -2,10 +2,10 @@ package org.project.servergame.Controller;
 
 import org.project.servergame.GameService;
 import org.project.servergame.tables.CurrentGame;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -21,22 +21,39 @@ public class Controller {
     public Controller(GameService service) {
         this.service = service;
     }
-
     @PostMapping("/startTimer")
-    public String startTimer(@RequestBody Map<String, String> request) {
-        System.out.println("userId = " + request);
+    public ResponseEntity<?> startTimer(@RequestBody Map<String, String> request) {
         String userId = request.get("userId");
         String startDateString = request.get("startDate");
+        String levelString = request.get("level");
+        int level = Integer.parseInt(levelString);
 
-
-////        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy, HH:mm:ss");
         LocalDateTime startDate = LocalDateTime.parse(startDateString, formatter);
 
-        service.save(new CurrentGame(1,1,userId,startDate, null));
-        return userId;
+        int timerId = service.save(new CurrentGame(level,userId,startDate,null)).getId();
+
+        return new ResponseEntity<>(timerId, HttpStatus.OK);
     }
 
+    @PostMapping("/stopTimer")
+    public ResponseEntity<?> stopTimer(@RequestBody Map<String, String> request) {
+        String userId = request.get("userId");
+        String endDateString = request.get("endDate");
+        String startDateString = request.get("startDate");
+        String levelString = request.get("level");
+        int level = Integer.parseInt(levelString);
+        String gameIdString = request.get("gameId");
+        int gameId = Integer.parseInt(gameIdString);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy, HH:mm:ss");
+        LocalDateTime endDate = LocalDateTime.parse(endDateString, formatter);
+        LocalDateTime startDate = LocalDateTime.parse(startDateString, formatter);
+
+        service.save(new CurrentGame(gameId,level,userId,startDate,endDate));
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
     @PostMapping("/validateKey/{level}")
     public ResponseEntity<Object> validateKey(@RequestBody String key,
                                               @PathVariable int level) {

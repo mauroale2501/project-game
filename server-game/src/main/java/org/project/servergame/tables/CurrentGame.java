@@ -11,6 +11,8 @@ import java.util.Date;
 @Table(name = "current_games")
 public class CurrentGame {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -27,6 +29,26 @@ public class CurrentGame {
     @Column(name="end_date" , nullable = true)
     private LocalDateTime endDate;
 
+    public CurrentGame(int levelId, String sessionId, LocalDateTime startDate, Object o) {
+        this.levelId=levelId;
+        this.sessionId=sessionId;
+        this.startDate = startDate;
+    }
+
+    public CurrentGame(int id,int levelId, String sessionId, LocalDateTime startDate, LocalDateTime endDate) {
+        this.levelId = levelId;
+        this.sessionId = sessionId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.id = id;
+    }
+
+    public CurrentGame(){
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public int getLevelId() {
         return levelId;
@@ -59,18 +81,4 @@ public class CurrentGame {
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
-
-
-
-    public CurrentGame(int id, int levelId, String sessionId, LocalDateTime startDate, LocalDateTime endDate) {
-        this.id = id;
-        this.levelId = levelId;
-        this.sessionId = sessionId;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-    public CurrentGame(){
-    }
-
-
 }
