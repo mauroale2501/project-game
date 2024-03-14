@@ -1,11 +1,7 @@
-export const stopTimer = (sessionId: string, level: number) => {
-  // const sessionId = localStorage.getItem("sessionId") || "";
-
+export const stopTimer = () => {
+  const sessionId = localStorage.getItem("sessionId") || "";
   const requestBody = {
     userId: sessionId,
-    level: level,
-    // gameId: timerIdString,
-    // startDate: startDate,
   };
 
   fetch("http://localhost:8080/api/stopTimer", {

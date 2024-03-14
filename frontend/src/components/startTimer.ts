@@ -1,10 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 
-type StartTimerProps = {
-  level: number;
-};
+// type StartTimerProps = {
+//   level: number;
+// };
 
-export const startTimer = async ({ level }: StartTimerProps) => {
+export const startTimer = async () => {
   const sessionId = localStorage.getItem("sessionId") || uuidv4();
   // const now = new Date();
   // const localDateTimeString = now.toLocaleString("se-SE", {
@@ -14,7 +14,6 @@ export const startTimer = async ({ level }: StartTimerProps) => {
   const requestBody = {
     userId: sessionId,
     // startDate: localDateTimeString,
-    level: level,
   };
 
   try {
@@ -31,10 +30,9 @@ export const startTimer = async ({ level }: StartTimerProps) => {
     }
 
     const data = await response.json();
-    const timerIdString = String(data);
-    console.log("ID timer from backend", timerIdString);
-
-    return { timerIdString };
+    if (!data) {
+      throw new Error("Empty or invalid response data");
+    }
   } catch (error) {
     console.error("Error timer", error);
     throw error;

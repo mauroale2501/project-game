@@ -167,7 +167,7 @@ const Home = ({ onSelectLevel }: HomeProps) => {
       const time = getLevel(selectedLevel);
       setSelectedTime(time);
       onSelectLevel(selectedLevel, time);
-      startTimer({ level: selectedLevel });
+      startTimer();
     } else {
       console.error("You must select a level to continue");
     }

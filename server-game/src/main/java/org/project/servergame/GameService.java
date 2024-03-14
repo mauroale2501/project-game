@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,5 +51,11 @@ public class GameService {
 
     public Optional<CurrentGame> findGameByUserId(String userId) {
         return repoCurrentGame.findBySessionId(userId);
+    }
+
+
+
+    public List<CurrentGame> getAllCurrentGames() {
+       return (List<CurrentGame>) repoCurrentGame.findAll();
     }
 }

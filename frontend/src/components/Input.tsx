@@ -30,8 +30,10 @@ const Input = ({ currentLevel }: { currentLevel: number }) => {
       const data = await response.json();
       setMessage(data.message);
 
-      const sessionId = localStorage.getItem("sessionId") || "";
-      stopTimer(sessionId, currentLevel); //
+      // const sessionId = localStorage.getItem("sessionId") || "";
+      if (currentLevel === 2) {
+        stopTimer();
+      }
 
       if (data.nextLevelLink) {
         setNextLevelLink(data.nextLevelLink);

@@ -81,10 +81,4 @@ public class CurrentGame {
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
-
-//    public int getLevel() {
-//        return  levelId;
-//    }
-
-
 }

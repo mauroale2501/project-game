@@ -45,6 +45,7 @@ function App() {
         <Route path="/level1" element={<Level1 initialTime={levelTime} />} />
         <Route path="/level2" element={<Level2 initialTime={levelTime} />} />
         <Route path="/last" element={<LastPage />} />
+        {/* <Route path="/last/:sessionId" element={<LastPage />} /> */}
       </Routes>
     </div>
   );
