@@ -4,7 +4,8 @@ import Hint from "./Hint";
 import Input from "./Input";
 import "../styles/Level1.css";
 import { useState } from "react";
-import NewTimer from "./NewTimer";
+// import { useEffect } from "react";
+// import NewTimer from "./NewTimer";
 
 type Level1Props = {
   initialTime: number;
@@ -14,6 +15,20 @@ const Level1 = ({ initialTime }: Level1Props) => {
   const [updateTime, setUpdateTime] = useState(initialTime);
 
   const level = 1;
+
+  // const fetchRefresh = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:8080/api/level1");
+  //     if (!response.ok) {
+  //       throw new Error("Failed fetch");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching hint:", error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetchRefresh();
+  // }, []);
 
   const fetchKey = async () => {
     try {
@@ -31,7 +46,6 @@ const Level1 = ({ initialTime }: Level1Props) => {
   };
   const reduceTime = () => {
     setUpdateTime((prevTime: number) => prevTime / 2);
-    console.log("esta es la funcion reduce");
   };
   return (
     <div className="all-level1">
@@ -39,29 +53,31 @@ const Level1 = ({ initialTime }: Level1Props) => {
         <Timer initialTime={updateTime} />
       </div>
       <div className="congrats-key">
-        <h1>Congrats</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        <h3>Congrats, you found the key!</h3>
+        <p>
+          Now, go back to desktop design and put the key to pass to the next
+          level.
+        </p>
         <Button onClick={fetchKey}>Get Key</Button>
-        {key && <p>{key}</p>}
+        {key && <p className="key-level1">{key}</p>}
       </div>
 
       <Container className="level-uncompleted">
         <section>
           <h1>Level 1</h1>
           <h2>Rules of level 1:</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit!</p>
+          <p>
+            There is a key hidden in this level. Find it to pass to level 2.
+          </p>
         </section>
         <section>
           <h2>Rules of Hint:</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. autem dicta
-            quod minus porro.
-          </p>
+          <p>You can</p>
           <Hint currentLevel={1} onReduceTime={reduceTime} />
           <Input currentLevel={1} />
         </section>
       </Container>
-      <NewTimer />
+      {/* <NewTimer /> */}
     </div>
   );
 };

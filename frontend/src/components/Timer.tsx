@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../styles/Timer.css";
 
 type TimerProps = {
   initialTime: number;
@@ -39,7 +40,7 @@ function Timer({ initialTime }: TimerProps) {
   };
 
   return (
-    <div>
+    <div className="timer-timer">
       <p>Time Remaining: {formatTime(timeRemaining)}</p>
     </div>
   );

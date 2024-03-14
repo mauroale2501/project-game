@@ -1,19 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
 
-// type StartTimerProps = {
-//   level: number;
-// };
-
-export const startTimer = async () => {
+export const startTimer = async (level: number) => {
   const sessionId = localStorage.getItem("sessionId") || uuidv4();
-  // const now = new Date();
-  // const localDateTimeString = now.toLocaleString("se-SE", {
-  //   timeZone: "Europe/Stockholm",
-  // });
-
+  // const level = 5;
   const requestBody = {
     userId: sessionId,
-    // startDate: localDateTimeString,
+    level: level,
   };
 
   try {

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -29,26 +30,40 @@ public class Controller {
     }
 
 
+//    @PostMapping("/level1")
+//    public  ResponseEntity<?> refreshLevel1(@PathVariable String userId){
+//     Optional<CurrentGame> existingGame = service.findGameByUserId(userId);
+//        if (existingGame.isPresent()) {
+//            return getResponseEntity(existingGame);
+//        } else {
+//            return null;
+//        }
+//    }
+
+//    private ResponseEntity<?> getResponseEntity(Optional<CurrentGame> existingGame) {
+//        CurrentGame game = existingGame.get();
+//        int currentLevel = game.getLevelId();
+//
+//        int nextLevel = currentLevel + 1;
+//        game.setLevelId(nextLevel);
+//        LocalDateTime startDateNoFormatted = LocalDateTime.now();
+//        LocalDateTime startDate = formatterDate(startDateNoFormatted);
+//        game.setStartDate(startDate);
+//        game.setEndDate(null);
+//        service.save(game);
+//        return ResponseEntity.ok(game);
+//    }
+
     @PostMapping("/startTimer")
     public ResponseEntity<?> startTimer(@RequestBody Map<String, String> request) {
         String userId = request.get("userId");
+        int level = Integer.parseInt(request.get("level"));
 
-        Optional<CurrentGame> existingGame = service.findGameByUserId(userId);
-        if (existingGame.isPresent()) {
-            CurrentGame game = existingGame.get();
-            int currentLevel = game.getLevelId();
-            if (game.getEndDate() != null) {
-                int nextLevel = currentLevel + 1;
-                game.setLevelId(nextLevel);
-                LocalDateTime startDateNoFormatted = LocalDateTime.now();
-                LocalDateTime startDate = formatterDate(startDateNoFormatted);
-                game.setStartDate(startDate);
-                game.setEndDate(null);
-                service.save(game);
-                return ResponseEntity.ok(game);
-            }
-            return ResponseEntity.ok(game);
-        } else {
+        CurrentGame existingGame = service.findGameByUserIdAndLevel(userId, level);
+        if (existingGame != null && existingGame.getEndDate() == null) {
+            return ResponseEntity.ok("Game in progress");
+        }
+        if (level == 1){
             LocalDateTime startDateNoFormatted = LocalDateTime.now();
             LocalDateTime startDate = formatterDate(startDateNoFormatted);
             CurrentGame newGame = new CurrentGame();
@@ -58,17 +73,33 @@ public class Controller {
             CurrentGame savedGame = service.save(newGame);
             return ResponseEntity.ok(savedGame);
         }
+        CurrentGame prevLevel = service.findGameByUserIdAndLevel(userId, level - 1 );
+        if (prevLevel != null && prevLevel.getEndDate() != null) {
+            LocalDateTime startDateNoFormatted = LocalDateTime.now();
+            LocalDateTime startDate = formatterDate(startDateNoFormatted);
+            CurrentGame newGame = new CurrentGame();
+            newGame.setLevelId(level);
+            newGame.setSessionId(userId);
+            newGame.setStartDate(startDate);
+            CurrentGame savedGame = service.save(newGame);
+            return ResponseEntity.ok(savedGame);
+        }
+        return ResponseEntity.ok(Collections.singletonMap("message", "not finished level"));
+
     }
 
 
     @PostMapping("/stopTimer")
     public ResponseEntity<String> stopTimer(@RequestBody Map<String, String> request) {
         String userId = request.get("userId");
+        int level = Integer.parseInt(request.get("level"));
 
-        Optional<CurrentGame> existingGame = service.findGameByUserId(userId);
-        int currentLevel = existingGame.get().getLevelId();
-        if (existingGame.isPresent() && existingGame.get().getLevelId() == currentLevel) {
-            CurrentGame game = existingGame.get();
+
+//        Optional<CurrentGame> existingGame = service.findGameByUserId(userId);
+//        int currentLevel = existingGame.get().getLevelId();
+//        CurrentGame game = service.findGameByUserIdAndLevel(userId, currentLevel);
+        CurrentGame game = service.findGameByUserIdAndLevelIdAndEndDate(userId, level);
+        if (game.getLevelId() == level && game.getEndDate() == null) {
 
             LocalDateTime endDateNoFormatted = LocalDateTime.now();
             LocalDateTime endDate = formatterDate(endDateNoFormatted);
@@ -76,7 +107,7 @@ public class Controller {
             service.save(game);
             return ResponseEntity.ok("Congrats!");
         } else {
-            return ResponseEntity.ok("no hay game");
+            return ResponseEntity.ok("no game");
         }
     }
 

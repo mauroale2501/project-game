@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import { stopTimer } from "./stopTimer";
+import { startTimer } from "./startTimer";
 // import { stopTimer } from "./stopTimer";
 // import { startTimer } from "./startTimer";
 
@@ -30,16 +31,18 @@ const Input = ({ currentLevel }: { currentLevel: number }) => {
       const data = await response.json();
       setMessage(data.message);
 
-      // const sessionId = localStorage.getItem("sessionId") || "";
-      if (currentLevel === 2) {
-        stopTimer();
-      }
+      stopTimer(currentLevel);
 
       if (data.nextLevelLink) {
         setNextLevelLink(data.nextLevelLink);
       }
     } catch (error) {
       setError("Invalid Key");
+    }
+  };
+  const handleNextLevelClick = () => {
+    if (currentLevel !== 2) {
+      startTimer(currentLevel + 1);
     }
   };
 
@@ -63,8 +66,11 @@ const Input = ({ currentLevel }: { currentLevel: number }) => {
         {message && <p>{message}</p>}
         {nextLevelLink && (
           <p>
-            Congratulations! <Link to={nextLevelLink}>Click Here</Link> to go to
-            the next level.
+            Congratulations!
+            <Link to={nextLevelLink} onClick={handleNextLevelClick}>
+              Click Here
+            </Link>
+            to go to the next level.
           </p>
         )}
       </Form>

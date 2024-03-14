@@ -19,11 +19,17 @@
   }
   .congrats-key {
     display: block;
+    margin-left: 20px;
+    padding: 20px;
   }
   .all-level1 {
     background-color: green;
     height: 250vh;
     border: 1px solid black;
     width: 150vh;
+  }
+  .key-level1 {
+    margin-left: 20px;
+    font-size: 50px;
   }
 }

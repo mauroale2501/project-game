@@ -4,7 +4,6 @@ import org.project.servergame.tables.CurrentGame;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,5 +56,27 @@ public class GameService {
 
     public List<CurrentGame> getAllCurrentGames() {
        return (List<CurrentGame>) repoCurrentGame.findAll();
+    }
+
+    public CurrentGame findGameByUserIdAndLevel(String userId, int level) {
+        List<CurrentGame> list = repoCurrentGame.findAllBySessionIdAndLevelId(userId, level);
+        if(list.isEmpty()){
+            return null;
+        }else if (list.size() > 1) {
+            throw new IllegalStateException("Multiple current games found for user ID and level");
+        }
+        CurrentGame currentGame = list.get(0);
+        return currentGame;
+    }
+
+    public CurrentGame findGameByUserIdAndLevelIdAndEndDate(String userId, int level) {
+        List<CurrentGame> list = repoCurrentGame.findAllBySessionIdAndLevelIdAndEndDateNull(userId, level);
+        if(list.isEmpty()){
+            return null;
+        }else if (list.size() > 1) {
+            throw new IllegalStateException("Multiple current games found for user ID and level");
+        }
+        CurrentGame currentGame = list.get(0);
+        return currentGame;
     }
 }

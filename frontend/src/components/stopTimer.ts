@@ -1,7 +1,8 @@
-export const stopTimer = () => {
+export const stopTimer = (level: number) => {
   const sessionId = localStorage.getItem("sessionId") || "";
   const requestBody = {
     userId: sessionId,
+    level: level,
   };
 
   fetch("http://localhost:8080/api/stopTimer", {

@@ -3,6 +3,7 @@ import { Navbar, Button, Container } from "react-bootstrap";
 import logo from "../assets/logo1.jpeg";
 import login from "../assets/login.jpeg";
 import "../styles/Nav.css";
+import { v4 as uuidv4 } from "uuid";
 
 type NavProps = {
   isLoggedIn: boolean;
@@ -16,10 +17,13 @@ const Nav = ({ isLoggedIn, onLogin, onLogout }: NavProps) => {
   const handleLoginClick = () => {
     onLogin();
     navigate("/");
+    const sessionId = localStorage.getItem("sessionId") || uuidv4();
+    localStorage.setItem("sessionId", sessionId);
   };
   const handleLogoutClick = () => {
     onLogout();
     navigate("/");
+    localStorage.removeItem("sessionId");
   };
 
   return (
