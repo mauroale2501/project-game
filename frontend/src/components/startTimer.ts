@@ -15,7 +15,6 @@ export const startTimer = async ({ level }: StartTimerProps) => {
     userId: sessionId,
     // startDate: localDateTimeString,
     level: level,
-    sessionId: sessionId,
   };
 
   try {

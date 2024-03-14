@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 //@Transactional
@@ -45,5 +46,9 @@ public class GameService {
         newGame.setStartDate(newGame.getStartDate());
        CurrentGame game= repoCurrentGame.save(newGame);
         return  game;
+    }
+
+    public Optional<CurrentGame> findGameByUserId(String userId) {
+        return repoCurrentGame.findBySessionId(userId);
     }
 }
