@@ -15,7 +15,7 @@ const Nav = ({ isLoggedIn, onLogin, onLogout }: NavProps) => {
 
   const handleLoginClick = () => {
     onLogin();
-    navigate("/Home");
+    navigate("/");
   };
   const handleLogoutClick = () => {
     onLogout();

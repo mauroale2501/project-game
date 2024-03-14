@@ -39,3 +39,25 @@
 .read-the-docs {
   color: #888;
 } */
+.level-block {
+  background: #f2f2f2;
+}
+.blog-block .holder {
+  background: #fff;
+  padding: 15px;
+  transition: box-shadow 0.3s linear;
+}
+
+.level-block .card-title {
+  margin: 0 0 10px;
+  color: #f64b4b;
+  font-size: 25px;
+}
+.home-buttons-star {
+  display: flex;
+  justify-content: center;
+  margin-top: 90px;
+}
+.button-start .button-subscribe {
+  margin-right: 40px;
+}
