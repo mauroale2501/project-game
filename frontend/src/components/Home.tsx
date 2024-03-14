@@ -115,6 +115,7 @@ import "../App.css";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
+import { startTimer } from "./startTimer";
 
 type HomeProps = {
   onSelectLevel: (level: number, time: number) => void;
@@ -145,7 +146,7 @@ const dataLevels = [
 ];
 
 const Home = ({ onSelectLevel }: HomeProps) => {
-  const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
+  const [selectedLevel, setSelectedLevel] = useState<number>(0);
   const [, setSelectedTime] = useState<number | null>(null);
 
   const getLevel = (level: number) => {
@@ -161,11 +162,19 @@ const Home = ({ onSelectLevel }: HomeProps) => {
     }
   };
 
-  const handleStartButton = (level: number) => {
-    const time = getLevel(level);
+  const handleStartButton = () => {
+    if (selectedLevel !== null) {
+      const time = getLevel(selectedLevel);
+      setSelectedTime(time);
+      onSelectLevel(selectedLevel, time);
+      startTimer({ level: selectedLevel });
+    } else {
+      console.error("You must select a level to continue");
+    }
+  };
+
+  const handleLevelSelection = (level: number) => {
     setSelectedLevel(level);
-    setSelectedTime(time);
-    onSelectLevel(level, time);
   };
 
   return (
@@ -188,7 +197,7 @@ const Home = ({ onSelectLevel }: HomeProps) => {
                     <Card.Text>{data.description}</Card.Text>
                     <Button
                       id={`button-${data.title.toLowerCase()}`}
-                      onClick={() => handleStartButton(data.id)}
+                      onClick={() => handleLevelSelection(data.id)}
                       className={selectedLevel === data.id ? "active" : ""}
                     >
                       {data.title}
@@ -204,7 +213,7 @@ const Home = ({ onSelectLevel }: HomeProps) => {
         <Link to="/level1">
           <Button
             className="button-start"
-            onClick={() => handleStartButton(selectedLevel || 1)}
+            onClick={() => handleStartButton()}
             disabled={!selectedLevel}
           >
             Start Demo

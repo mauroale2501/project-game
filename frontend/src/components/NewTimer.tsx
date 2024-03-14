@@ -12,18 +12,18 @@ const NewTimer = () => {
     return newSessionId;
   });
   const [timerIdString, setTimerIdString] = useState<string>("");
-  const [startDate, setStartDate] = useState<string>("");
+  // const [startDate, setStartDate] = useState<string>("");
 
   const startTimer = () => {
-    const now = new Date();
-    const localDateTimeString = now.toLocaleString("se-SE", {
-      timeZone: "Europe/Stockholm",
-    });
-    setStartDate(localDateTimeString);
+    // const now = new Date();
+    // const localDateTimeString = now.toLocaleString("se-SE", {
+    //   timeZone: "Europe/Stockholm",
+    // });
+    // setStartDate(localDateTimeString);
     const level = 2;
     const requestBody = {
       userId: sessionId,
-      startDate: localDateTimeString,
+      // startDate: localDateTimeString,
       level: level,
     };
 
@@ -63,7 +63,7 @@ const NewTimer = () => {
       endDate: localDateTimeString,
       level: level,
       gameId: timerIdString,
-      startDate: startDate,
+      // startDate: startDate,
     };
 
     fetch("http://localhost:8080/api/stopTimer", {

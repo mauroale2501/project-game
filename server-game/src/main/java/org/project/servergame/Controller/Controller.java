@@ -24,18 +24,26 @@ public class Controller {
     @PostMapping("/startTimer")
     public ResponseEntity<?> startTimer(@RequestBody Map<String, String> request) {
         String userId = request.get("userId");
-        String startDateString = request.get("startDate");
         String levelString = request.get("level");
         int level = Integer.parseInt(levelString);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy, HH:mm:ss");
-        LocalDateTime startDate = LocalDateTime.parse(startDateString, formatter);
-
+        LocalDateTime startDateNoFormatted = LocalDateTime.now();
+       LocalDateTime startDate = formatterDate(startDateNoFormatted);
         int timerId = service.save(new CurrentGame(level,userId,startDate,null)).getId();
 
         return new ResponseEntity<>(timerId, HttpStatus.OK);
     }
 
+    public LocalDateTime formatterDate (LocalDateTime date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = date.format(formatter);
+        LocalDateTime finalDate = LocalDateTime.parse(formattedDate, formatter);
+        return finalDate;
+    }
+
+//        String startDateString = request.get("startDate");
+
+    //           LocalDateTime startDateFormatted =     LocalDateTime.parse(startDate, formatter);
     @PostMapping("/stopTimer")
     public ResponseEntity<?> stopTimer(@RequestBody Map<String, String> request) {
         String userId = request.get("userId");
@@ -74,6 +82,15 @@ public class Controller {
     }
 
 
+
+//    private String getCorrectKey(int currentLevel){
+//        if(currentLevel == 1) {
+//            service.getKeyById(currentLevel)
+//        } else if (currentLevel == 2) {
+//            String
+//
+//        }
+//    }
     private String getNextLevelLink(int currentLevel) {
         if (currentLevel == 1) {
             return "/level2";
@@ -96,13 +113,12 @@ public class Controller {
     @GetMapping("/keyLevel/{level}")
     public ResponseEntity<String> getKeyLevel(@PathVariable int level) {
         String message;
-        String keyLevel2;
+        String keyLevel2 = "eyJhbGciOiJIUzI1NiJ9.eyJLRVkiOiJoZWxsbzEyMyJ9.3fmMOp1-ceBMO6nStPDyByVp49YVtvIhySPrZWit97U";
 
         if (level == 1) {
             return ResponseEntity.ok(service.getKeyById(level));
 
         } else if (level == 2) {
-            keyLevel2 = service.getKeyById(level);
             message = "oops! maybe you should look elsewhere";
 
         } else {

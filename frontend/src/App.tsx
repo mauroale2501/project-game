@@ -7,7 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import LastPage from "./components/LastPage";
 import Level2 from "./components/Level2";
 import { useState } from "react";
-import HomeSimple from "./components/HomeSimpleTest1";
+import HomeSimple from "./components/HomeSimple";
 // import HomeSimpleTest from "./components/HomeSimpleTest";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
