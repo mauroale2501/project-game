@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import Hint from "./Hint";
 import Input from "./Input";
 import Timer from "./Timer";
@@ -43,21 +43,22 @@ const Level2 = ({ initialTime }: Level2Props) => {
         <div className="timer">
           <Timer initialTime={updateTime} />
         </div>
-        <div className="button-level2">
-          <Button onClick={fetchLevel2}>Pass to next level</Button>
-          {keyLevel2 && <p>{keyLevel2}</p>}
+        <div className="pseudo-container">
+          <div className="button-level2">
+            <Button onClick={fetchLevel2}>Pass to next level</Button>
+            <div className="key-level2">
+              {keyLevel2 && <p className="text-key-level2">{keyLevel2}</p>}
+            </div>
+          </div>
         </div>
-      </div>
-      <section className="hint-level2">
-        <h2>Rules of Hint:</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. autem dicta
-          quod minus porro.
-        </p>
-        <Hint currentLevel={2} onReduceTime={reduceTime} />
-      </section>
-      <div className="input-level2">
-        <Input currentLevel={2} />
+        <Container className="container-level2">
+          <section>
+            <h2>Hint:</h2>
+            <p>Need help? Press the button to get a hint</p>
+            <Hint currentLevel={2} onReduceTime={reduceTime} />
+            <Input currentLevel={2} />
+          </section>
+        </Container>
       </div>
     </div>
   );

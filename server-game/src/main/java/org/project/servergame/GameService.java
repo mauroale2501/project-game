@@ -63,7 +63,7 @@ public class GameService {
         if(list.isEmpty()){
             return null;
         }else if (list.size() > 1) {
-            throw new IllegalStateException("Multiple current games found for user ID and level");
+            throw new IllegalStateException("more than one game");
         }
         CurrentGame currentGame = list.get(0);
         return currentGame;
@@ -74,7 +74,7 @@ public class GameService {
         if(list.isEmpty()){
             return null;
         }else if (list.size() > 1) {
-            throw new IllegalStateException("Multiple current games found for user ID and level");
+            throw new IllegalStateException("more than one game");
         }
         CurrentGame currentGame = list.get(0);
         return currentGame;

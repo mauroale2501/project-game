@@ -15,7 +15,7 @@ const dataLevels = [
     time: "(10 minutes)",
     title: "Easy",
     description:
-      "Welcome to the Easy Level! You have 10 minutes to solve the puzzles and complete this level. Use your wit and logic to find the solution!. Good luck, and let the challenge begin!",
+      "Welcome to the Easy Level! You have 10 minutes to solve the puzzles and complete this level. Use your skills and logic to find the solution!. Good luck, and let the challenge begin!",
   },
   {
     id: 2,

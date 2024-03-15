@@ -65,14 +65,14 @@ const Level1 = ({ initialTime }: Level1Props) => {
       <Container className="level-uncompleted">
         <section>
           <h1>Level 1</h1>
-          <h2>Rules of level 1:</h2>
-          <p>
-            There is a key hidden in this level. Find it to pass to level 2.
+
+          <p className="text-rules-level1">
+            There is a hidden key in this level. Find it to go to level 2!
           </p>
         </section>
         <section>
-          <h2>Rules of Hint:</h2>
-          <p>You can</p>
+          <h2>Hint:</h2>
+          <p>Need help? Press the button to get a hint</p>
           <Hint currentLevel={1} onReduceTime={reduceTime} />
           <Input currentLevel={1} />
         </section>

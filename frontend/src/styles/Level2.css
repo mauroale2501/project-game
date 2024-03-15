@@ -1,0 +1,31 @@
+h1 {
+  text-align: center;
+}
+
+p {
+  font-size: 20px;
+}
+
+.button-level2 {
+  display: flex;
+  margin-top: 100px;
+  justify-content: center;
+  margin-right: 100px;
+}
+
+.key-level2 {
+  margin-left: 20px;
+  font-size: 50px;
+}
+
+.text-key-level2 {
+  font-size: 25px;
+}
+
+.all-level2 {
+  border: 1px solid black;
+}
+/* 
+.pseudo-container {
+  border: 1px solid black;
+} */

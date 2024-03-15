@@ -6,6 +6,7 @@ import { stopTimer } from "./stopTimer";
 import { startTimer } from "./startTimer";
 // import { stopTimer } from "./stopTimer";
 // import { startTimer } from "./startTimer";
+import "../styles/Input.css";
 
 const Input = ({ currentLevel }: { currentLevel: number }) => {
   const [key, setKey] = useState("");
@@ -65,13 +66,15 @@ const Input = ({ currentLevel }: { currentLevel: number }) => {
         {error && <p>{error}</p>}
         {message && <p>{message}</p>}
         {nextLevelLink && (
-          <p>
-            Congratulations!
-            <Link to={nextLevelLink} onClick={handleNextLevelClick}>
-              Click Here
-            </Link>
-            to go to the next level.
-          </p>
+          <div className="congratulationCard">
+            <p>
+              Congratulations!{" "}
+              <Link to={nextLevelLink} onClick={handleNextLevelClick}>
+                Click Here{" "}
+              </Link>
+              to go to the next level.
+            </p>
+          </div>
         )}
       </Form>
     </>

@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Button } from "react-bootstrap";
+import "../styles/Hint.css";
 
 type HintProps = {
   onReduceTime: () => void;
   currentLevel: number;
 };
 
-const Hint = ({ onReduceTime, currentLevel }: HintProps) => {
+const Hint = ({ currentLevel }: HintProps) => {
   const [hint, setHint] = useState("");
   const [lastHintId, setLastHintId] = useState(0);
 
@@ -22,7 +23,7 @@ const Hint = ({ onReduceTime, currentLevel }: HintProps) => {
       const data = await response.text();
 
       setHint(data);
-      onReduceTime();
+
       setLastHintId(lastHintId + 1);
     } catch (error) {
       console.error("Error fetching hint:", error);
@@ -30,9 +31,11 @@ const Hint = ({ onReduceTime, currentLevel }: HintProps) => {
   };
 
   return (
-    <div>
-      <Button onClick={fetchHint}>Get Hint</Button>
-      {hint && <p>{hint}</p>}
+    <div className="container-all-hint">
+      <Button onClick={fetchHint} className="button-hint">
+        Get Hint
+      </Button>
+      <div className="container-hint">{hint && <p>{hint}</p>}</div>
     </div>
   );
 };

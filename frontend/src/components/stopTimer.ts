@@ -16,9 +16,11 @@ export const stopTimer = (level: number) => {
       if (!response.ok) {
         throw new Error("Error stop");
       }
+
       console.log("Stop time successful");
     })
     .catch((error) => {
       console.error("Error stopTimer", error);
+      console.log("session id en stoptimer" + sessionId);
     });
 };

@@ -120,7 +120,7 @@ public class Controller {
 
         if (key.equals(realKey)) {
             nextLevelLink = getNextLevelLink(level);
-            message = "Congrats! Click here to go to the next level";
+            message = "";
         } else {
             message = "Invalid key";
             return ResponseEntity.badRequest().body(message);

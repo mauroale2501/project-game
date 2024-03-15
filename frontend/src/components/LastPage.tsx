@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
+import "../styles/LastPage.css";
 
 interface CurrentGame {
   id: number;
@@ -51,6 +52,7 @@ const LastPage: React.FC = () => {
 
   return (
     <div>
+      <hr />
       <h1>Game Results</h1>
       <Button onClick={fetchCurrentGames}>get results</Button>
       <Table striped bordered hover>
@@ -59,6 +61,7 @@ const LastPage: React.FC = () => {
             <th>User ID</th>
             <th>Start Date</th>
             <th>End Date</th>
+            <th>Level</th>
             <th>Time Score</th>
           </tr>
         </thead>
@@ -68,6 +71,7 @@ const LastPage: React.FC = () => {
               <td>{game.sessionId}</td>
               <td>{game.startDate}</td>
               <td>{game.endDate}</td>
+              <td>{game.levelId}</td>
               <td>
                 {calculateTimeDifference(game.startDate, game.endDate).minutes}{" "}
                 minutes :{" "}

@@ -21,6 +21,7 @@
     display: block;
     margin-left: 20px;
     padding: 20px;
+    max-width: 500px;
   }
   .all-level1 {
     background-color: green;
@@ -32,4 +33,15 @@
     margin-left: 20px;
     font-size: 50px;
   }
+}
+
+.text-rules-level1 {
+  font-size: 20px;
+}
+h1 {
+  text-align: center;
+}
+
+h2 {
+  font-size: 20px;
 }
