@@ -12,22 +12,22 @@ type HomeProps = {
 const dataLevels = [
   {
     id: 1,
-    time: "(10 minutes)",
     title: "Easy",
+    time: "(10 minutes)",
     description:
       "Welcome to the Easy Level! You have 10 minutes to solve the puzzles and complete this level. Use your skills and logic to find the solution!. Good luck, and let the challenge begin!",
   },
   {
     id: 2,
-    time: "(7 minutes)",
     title: "Intermediate",
+    time: "(7 minutes)",
     description:
       "Welcome to the Intermediate Level! This level presents a bit more challenge. You have 7 minutes to solve the puzzles and advance to the next stage. Are you ready to test your skills?",
   },
   {
     id: 3,
-    time: "(4 minutes)",
     title: "Advanced",
+    time: "(4 minutes)",
     description:
       "Welcome to the Advanced Level! You have 4 minutes to crack the codes. This level is designed for the true puzzle masters. Prepare yourself for the ultimate challenge!",
   },
@@ -80,8 +80,8 @@ const Home = ({ onSelectLevel }: HomeProps) => {
               <div className="holder">
                 <Card>
                   <Card.Body>
-                    <time>{data.time}</time>
                     <Card.Title>{data.title}</Card.Title>
+                    <time>{data.time}</time>
                     <Card.Text>{data.description}</Card.Text>
                     <Button
                       id={`button-${data.title.toLowerCase()}`}

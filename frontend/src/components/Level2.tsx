@@ -1,4 +1,4 @@
-import { Button, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Hint from "./Hint";
 import Input from "./Input";
 import Timer from "./Timer";
@@ -45,7 +45,9 @@ const Level2 = ({ initialTime }: Level2Props) => {
         </div>
         <div className="pseudo-container">
           <div className="button-level2">
-            <Button onClick={fetchLevel2}>Pass to next level</Button>
+            <button onClick={fetchLevel2} className="button-pass-level2">
+              Pass to next level
+            </button>
             <div className="key-level2">
               {keyLevel2 && <p className="text-key-level2">{keyLevel2}</p>}
             </div>

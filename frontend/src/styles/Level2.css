@@ -25,7 +25,20 @@ p {
 .all-level2 {
   border: 1px solid black;
 }
-/* 
+
 .pseudo-container {
-  border: 1px solid black;
-} */
+  /* border: 1px solid black; */
+  margin-bottom: 100px;
+}
+
+.button-pass-level2 {
+  background: rgb(65, 159, 31);
+  border-color: rgb(65, 159, 31);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+  padding: 13px 35px;
+  text-transform: uppercase;
+  transition: background 0.3s linear, color 0.3s linear;
+  -webkit-transition: background 0.3s linear, color 0.3s linear;
+}
